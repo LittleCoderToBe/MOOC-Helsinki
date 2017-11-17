@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+
+public class ArrayLists {
+    
+    private ArrayList<Plane> planes;
+    private ArrayList<Flight> flights;
+    
+    public ArrayLists() {
+        this.planes = new ArrayList<Plane>();
+        this.flights = new ArrayList<Flight>();
+    }
+    
+    public void printPlanes() {
+        for (Object i : this.planes) {
+            System.out.println(i);
+        }
+    }
+    
+     public void printFlights() {
+        for (Object i : this.flights) {
+            System.out.println(i);
+        }
+    }
+    
+    public void addPlane(Plane plane) {
+        this.planes.add(plane);
+    }
+    
+    public void addFlight(Flight flight) {
+        this.flights.add(flight);
+    }
+    
+    public Plane findPlane(String id) {
+        for (Plane i : this.planes) {
+            if (i.getId().equals(id)) {
+                return i;
+            }
+        }
+        return null;
+    }
+    
+}
