@@ -1,0 +1,21 @@
+
+public class Flight {
+    
+    private Plane plane;
+    private String depAirport;
+    private String arrAirport;
+    
+    public Flight(Plane plane, String dep, String arr) {
+        this.plane = plane;
+        this.depAirport = dep;
+        this.arrAirport = arr;
+    }
+    
+    @Override
+    public String toString() {
+        return this.plane + " (" + this.depAirport + "-" + this.arrAirport + ")";
+    }
+    
+    
+    
+}
