@@ -1,0 +1,74 @@
+
+import java.util.Scanner;
+
+public class Logic {
+
+    Scanner reader = new Scanner(System.in);
+    ArrayLists lists = new ArrayLists();
+
+    public void start() {
+
+        String command = " ";
+        String tempData1 = " ";
+        int tempData2 = 0;
+        String tempData3 = " ";
+        String tempData4 = " ";
+        Plane tempPlane;
+
+        System.out.println("Airport panel");
+        System.out.println("--------------------");
+        System.out.println("");
+
+        while (true) {
+            System.out.println("Choose operation:");
+            System.out.println("[1] Add airplane");
+            System.out.println("[2] Add flight");
+            System.out.println("[x] Exit");
+            command = reader.next();
+            if (command.equals("x")) {
+                break;
+            } else if (command.equals("1")) {
+                System.out.println("Give plane ID: ");
+                tempData1 = reader.next();
+                System.out.println("Give plane capacity: ");
+                tempData2 = Integer.parseInt(reader.next());
+                lists.addPlane(new Plane(tempData1, tempData2));
+            } else {
+                System.out.println("Give plane ID: ");
+                tempData4 = reader.next();
+                System.out.println("Give departure airport code: ");
+                tempData1 = reader.next();
+                System.out.println("Give destination airport code: ");
+                tempData3 = reader.next();
+                lists.addFlight(new Flight(lists.findPlane(tempData4), tempData1, tempData3));
+            }
+        }
+        System.out.println("Flight service");
+        System.out.println("------------");
+        System.out.println("");
+        
+        
+
+        while (true) {
+            System.out.println("Choose operation:");
+            System.out.println("[1] Print planes");
+            System.out.println("[2] Print flights");
+            System.out.println("[3] Print plane info");
+            System.out.println("[x] Quit");
+            command = reader.next();
+            if (command.equals("3")) {
+                System.out.println("Give plane ID: ");
+                tempData4 = reader.next();
+                System.out.println(lists.findPlane(tempData4));
+            } else if (command.equals("1")) {
+                lists.printPlanes();
+            } else if (command.equals("2")) {
+                lists.printFlights();
+            } else {
+                break;
+
+            }
+        }
+
+    }
+}
