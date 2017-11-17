@@ -1,0 +1,19 @@
+
+public class Plane {
+    
+    private String id;
+    private int planeCapacity;
+    
+    public Plane(String id, int planeCapacity) {
+        this.id = id;
+        this.planeCapacity = planeCapacity;
+    }
+    
+    @Override
+    public String toString() {
+        return this.id + " (" + this.planeCapacity + " ppl)";
+    }
+    public String getId() {
+        return this.id;
+    }
+}
