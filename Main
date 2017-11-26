@@ -1,0 +1,17 @@
+
+import java.util.Arrays;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Jump jump = new Jump();
+        Tournament tournament = new Tournament();
+       // System.out.println(jump);
+        //jump.jump();
+       // System.out.println(jump);
+        Notes notes = new Notes();
+        tournament.start();
+    }
+}
