@@ -1,0 +1,116 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Tournament {
+
+    private HashMap<String, Jumper> tournament;
+    private Sorting sortedJumpers = new Sorting();
+    private Scanner reader;
+    private int roundCounter = 0;
+    private Jump jump = new Jump();
+
+    public Tournament() {
+        this.reader = new Scanner(System.in);
+        this.tournament = new HashMap();
+    }
+
+    public void start() {
+        System.out.println("Kumpula ski jumping week");
+        this.addPlayers();
+        System.out.println("The tournament begins!");
+        this.round();
+        this.ending();
+    }
+
+    public void addPlayers() {
+
+        System.out.println("Write the names of the participants one at a time; an empty string brings you to the jumping phase.");
+
+        while (true) {
+            System.out.println("  Participant name: ");
+            String name = reader.nextLine();
+            if (name.length() != 0) {
+                tournament.put(name, new Jumper(name));
+                sortedJumpers.addJumper(new Jumper(name));
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void round() {
+        while (true) {
+            System.out.println("Write \"jump\" to jump; otherwise you quit: ");
+            String command = reader.nextLine();
+            if (command.equals("jump")) {
+                this.roundMechanics();
+            } else {
+                System.out.println("Thanks!");
+                break;
+            }
+        }
+    }
+
+    public void roundMechanics() {
+        roundCounter++;
+        System.out.println("Round " + roundCounter);
+        System.out.println("Jumping order:");
+        this.jumpingOrder();
+        System.out.println("Results of round " + roundCounter);
+        this.jumpAndGrade();
+    }
+
+    public void jumpingOrder() {
+        //sortedJumpers.sort();
+        int nextJumper = 1;
+        sortedJumpers.sort();
+        List<Jumper> newJumpers = sortedJumpers.getFJumpers();
+        for (Jumper j : newJumpers) {
+            System.out.println("  " + nextJumper + ". " + j + " (" + j.getTotalPoints() + " points)");
+            nextJumper++;
+        }
+    }
+
+    public void jumpAndGrade() {
+        int nextJumper = 1;
+        int jumpLength = 0;
+        sortedJumpers.sort();
+        List<Jumper> newJumpers = sortedJumpers.getFJumpers();
+        for (Jumper j : newJumpers) {
+            Notes notes = new Notes();
+            System.out.println("  " + j);
+            nextJumper++;
+            jumpLength = jump.jump();
+            j.addJump(jumpLength);
+            j.addPoints(jumpLength);
+            System.out.print("    length: ");
+            jump.jump2();
+            System.out.println("");
+            notes.notes();
+            System.out.println("    judge votes: " + notes);
+            notes.sort();
+            notes.swapNotes();
+            j.addPoints(notes.sumNotes());
+        }
+    }
+
+    public void ending() {
+        System.out.println("Tournament results:");
+        System.out.println("Position    Name");
+        sortedJumpers.sort();
+        sortedJumpers.reverse();
+        int counter = 1;
+        List<Jumper> newJumpers = sortedJumpers.getFJumpers();
+        for (Jumper j : newJumpers) {
+            System.out.println(counter + "           " + j + " (" + j.getTotalPoints() + " points)");
+            System.out.print("            jump lengths: ");
+            counter++;
+            for (int i = 0; i < roundCounter; i++) {
+                System.out.print(j.getJump(i) + " m, ");
+            }
+            System.out.println("");
+        }
+    }
+}
