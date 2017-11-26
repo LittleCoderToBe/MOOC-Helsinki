@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
+public class Sorting {
+    
+    private List<Jumper> jumpers;
+    
+    public Sorting() {
+        this.jumpers = new ArrayList();
+    }
+    
+    public void sort() {
+        Collections.sort(jumpers);
+    }
+    
+    public void addJumper(Jumper jumper) {
+        this.jumpers.add(jumper);
+    }
+    
+    public List getFJumpers() {
+        return this.jumpers;
+    }
+    
+   
+    public void reverse() {
+        Collections.reverse(jumpers);
+    }
+    
+                
+    
+}
