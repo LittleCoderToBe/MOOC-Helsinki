@@ -1,0 +1,29 @@
+import java.util.Random;
+
+public class Jump {
+
+    private int jump;
+    private Random random = new Random();
+
+    public Jump() {
+        this.jump = 0;
+    }
+
+    public int jump() {
+        this.jump = random.nextInt(120);
+        while (jump < 60) {
+            this.jump = random.nextInt(120);
+        }
+        return jump;
+    }
+
+    @Override
+    public String toString() {
+        return "" + this.jump;
+    }
+    
+    public void jump2() {
+        System.out.print(this.jump);
+    }
+}
+
